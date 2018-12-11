@@ -4,3 +4,4 @@ a = b
 a = c
 f(f(a)) != f(b)
 f(b) != f(c)
+g(c) = c

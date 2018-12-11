@@ -2,6 +2,7 @@ from node import Node
 import re
 from dag import DAG
 
+
 def import_data(nameFile):
     with open(nameFile) as f:
         data = [line.rstrip('\n') for line in f.readlines()]
@@ -25,8 +26,13 @@ def parse_data(data):
 if __name__ == "__main__":
     input = import_data("data/input1.txt")
     parsed = parse_data(input)
-    #d = DAG()
-    #d.build_dag(parsed)
-    #print(parsed)
+    print(parsed)
+    DAG.build_dag(parsed)
 
-    print(DAG.find_sons("f(f(a,b),f(b))"))
+    for i in DAG.nodes:
+        print("id = ", i.id)
+        print("fn = ", i.fn)
+        print("find = ", i.find)
+        print("ccpar = ", i.ccpar)
+        print("args = ", i.args)
+        print("enemies = ", i.enemies)
