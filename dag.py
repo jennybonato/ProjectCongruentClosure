@@ -7,27 +7,35 @@ class DAG:
         self.nodes = {}
 
     @classmethod
-    def find_node(cls, id):
-        for n in cls.nodes:
-            if n.id == id:
-                return DAG.nodes.index(n)
-        return -1
-
-    @classmethod
     def find(cls, id):
-        for i in cls.nodes:
-            if i.id == id:
-                if i.id == i.find:
-                    print("ramo if ", i.id, i.find)
-                    return i.id
-                else:
-                    print("ramo else ", i.id, i.find)
-                    return cls.find(i.find)
+        rappre = cls.nodes[id]
+        if rappre.id == rappre.find:
+            return rappre.id
+        else:
+            return cls.find(rappre.find)
 
     def is_satisfable(self, diseq):
-        for coppia in diseq:
-            e1 = hash(coppia[0].strip())
-            e2 = hash(coppia[1].strip())
-            if self.find(e1) == self.find(e2):
-                return False
-        return True
+        print("da sistemare")
+
+    def merge(self, n1, n2):
+        if n1.id != n2.id:
+            p1 = n1.ccpar
+            p2 = n2.ccpar
+            print("n1 = ", n1.id, p1)
+            print("n2 = ", n2.id, p2)
+            self.union(n1, n2)
+            print("n1 = ", self.id, self.find, self.ccpar)
+            print("n2 = ", n2.id, n2.find, n2.ccpar)
+            for i in p1:
+                for j in p2:
+                    print(i, j, i.congruent(j))
+                    if i.find != j.find and i.congruent(j):
+                        self.merge(i, j)
+
+    def union(self, n1, n2):
+        id1 = DAG.find(n1.id)
+        id2 = DAG.find(n2.id)
+        self.nodes[id1].find = id2
+        for par1 in self.nodes[id1].ccpar:
+            self.nodes[id2].add_parent(par1)
+        self.nodes[n1].ccpar = []

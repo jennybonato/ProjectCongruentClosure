@@ -3,8 +3,8 @@ from parser import Parser
 from dag import DAG
 
 
-def import_data(nameFile):
-    with open(nameFile) as f:
+def import_data(name_file):
+    with open(name_file) as f:
         data = [line.rstrip('\n') for line in f.readlines()]
     return data
 
@@ -12,35 +12,18 @@ def import_data(nameFile):
 if __name__ == "__main__":
     input = import_data("data/input1.txt")
     d = DAG()
-    p = Parser()
-    parsed = p.division_eq(input)
-    print(parsed)
+    p = Parser(input, d)
     print(p.nodes)
-    # print("a =", DAG.nodes[DAG.find(hash("a"))].fn, hash("a"))
-    '''
-    print("     id                 fn   find               args        ccpar       enemies")
-    for n1 in d.nodes:
-        print("n = ", n1.id, n1.fn, n1.find, n1.args, n1.ccpar, n1.enemies)
-    print('\n\n\n\n')
-    for coppiaeq in parsed[0]:
-        n3 = d.find_node(hash(coppiaeq[0].strip()))
-        n3.merge(hash(coppiaeq[1].strip()))
-    print("Soddisfacibile = ", d.is_satisfable(parsed[1]))
 
-    print("     id                 fn   find               args        ccpar       enemies")
-    for n1 in d.nodes:
-        print("n = ", n1.id, n1.fn, n1.find, n1.args, n1.ccpar, n1.enemies)
+    for i in d.nodes.keys():
+        print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       args = ",
+              d.nodes[i].args, "|       par = ", d.nodes[i].ccpar, "|        enemies = ", d.nodes[i].enemies)
+
+    for coppiaeq in p.eq:
+        d.merge(d.nodes[coppiaeq[0]], d.nodes[coppiaeq[1]])
+    print("Soddisfacibile = ", d.is_satisfable(p.diseq))
 
     print('\n\n\n\n\n')
-    n = d.nodes[DAG.find_node(hash("a"))]
-    print(n.id, n.find)
-    print(DAG.find(n))
-    
-    for i in DAG.nodes:
-        print("id = ", i.id)
-        print("fn = ", i.fn)
-        print("find = ", i.find)
-        print("ccpar = ", i.ccpar)
-        print("args = ", i.args)
-        print("enemies = ", i.enemies)
-    '''
+    for i in d.nodes.keys():
+        print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       args = ",
+              d.nodes[i].args, "|       par = ", d.nodes[i].ccpar, "|        enemies = ", d.nodes[i].enemies)

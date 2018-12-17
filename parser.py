@@ -1,15 +1,15 @@
 from node import Node
 import re
 
-
 class Parser:
 
-    def __init__(self):
+    def __init__(self, data, d):
         self.nodes = {}
+        self.diseq = []
+        self.eq = []
+        self.parse_data(data, d)
 
     def division_eq(self, data):
-        diseq = []
-        eq = []
         for element in data:
             if "!=" in element:
                 coppia = re.split('!=', element)
@@ -17,27 +17,26 @@ class Parser:
                 self.nodes[hash(coppia[1].strip())] = coppia[1].strip()
                 coppia[0] = hash(coppia[0].strip())
                 coppia[1] = hash(coppia[1].strip())
-                diseq.append(coppia)
+                self.diseq.append(coppia)
             elif "=" in element:
                 coppia = re.split('=', element)
                 self.nodes[hash(coppia[0].strip())] = coppia[0].strip()
                 self.nodes[hash(coppia[1].strip())] = coppia[1].strip()
                 coppia[0] = hash(coppia[0].strip())
                 coppia[1] = hash(coppia[1].strip())
-                eq.append(coppia)
-        return eq, diseq
+                self.eq.append(coppia)
 
-    def parse_data(self, d):
-        for coppia in list[0]:
-            for element in coppia:
-                self.build_node(element.strip(), None, d)
-        for coppia in list[1]:
-            for element in coppia:
-                self.build_node(element.strip(), None, d)
-            n1 = d.find_node(hash(coppia[0].strip()))
-            n2 = d.find_node(hash(coppia[1].strip()))
-            d.nodes[n1].add_enemies(d.nodes[n2].id)
-            d.nodes[n2].add_enemies(d.nodes[n1].id)
+    def parse_data(self, data, d):
+        self.division_eq(data)
+
+        # build all nodes
+        for element in self.nodes.keys():
+            self.build_node(element, None, d)
+
+        # add enemeis
+        for coppia in self.diseq:
+            d.nodes[coppia[0]].add_enemies(coppia[1])
+            d.nodes[coppia[1]].add_enemies(coppia[0])
 
     @staticmethod
     def find_sons(termine, lenfn):
@@ -56,20 +55,18 @@ class Parser:
             i = i + 1
         return sons
 
-    def build_node(self, termine, parent, d):
-        id = hash(termine)
+    def build_node(self, element, parent, d):
         args = []
-        fn = termine
-        neq = d.find_node(id)
-        if neq >= 0:
-            (d.nodes[neq]).add_parent(parent)
+        fn = self.nodes[element]
+        if element in d.nodes.keys():
+            (d.nodes[element]).add_parent(parent)
         else:
-            if "(" in termine:
-                fn = termine.split("(")[0]
-                sons = self.find_sons(termine, len(fn))
+            if "(" in self.nodes[element]:
+                fn = self.nodes[element].split("(")[0]
+                sons = self.find_sons(self.nodes[element], len(fn))
                 for s in sons:
-                    self.build_node(s, id, d)
+                    self.build_node(hash(s), element, d)
                     args.append(hash(s))
-            n = Node(id, fn, id, args)
+            n = Node(element, fn, element, args)
             n.add_parent(parent)
-            d.nodes.append(n)
+            d.nodes[element] = n
