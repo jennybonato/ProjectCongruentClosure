@@ -1,62 +1,33 @@
-from node import Node
-
 
 class DAG:
-    nodes = []
 
-    @classmethod
-    def find_sons(cls, termine, lenfn):
-        i = lenfn + 1
-        sons = []
-        index_son = i
-        par = 0
-        while i < len(termine):
-            if termine[i] == '(':
-                par = 1
-            elif termine[i] == ')' and par == 1:
-                par = 0
-            elif (termine[i] == ',' and par == 0) or (termine[i] == ')' and par == 0):
-                sons.append(termine[index_son:i])
-                index_son = i + 1
-            i = i + 1
-        return sons
+    nodes = {}
+
+    def __init__(self):
+        self.nodes = {}
 
     @classmethod
     def find_node(cls, id):
-        for n in DAG.nodes:
+        for n in cls.nodes:
             if n.id == id:
-                return n
-        return None
+                return DAG.nodes.index(n)
+        return -1
 
     @classmethod
-    def build_node(cls, termine, parent):
-        id = hash(termine)
-        sons = []
-        args = []
-        fn = termine
-        neq = DAG.find_node(id)
-        if neq is not None:
-            neq.add_parent(parent)
-        else:
-            if "(" in termine:
-                fn = termine.split("(")[0]
-                sons = DAG.find_sons(termine, len(fn))
-                for s in sons:
-                    DAG.build_node(s, id)
-                    args.append(hash(s))
-            n = Node(id, fn, id, args)
-            n.add_parent(parent)
-            DAG.nodes.append(n)
+    def find(cls, id):
+        for i in cls.nodes:
+            if i.id == id:
+                if i.id == i.find:
+                    print("ramo if ", i.id, i.find)
+                    return i.id
+                else:
+                    print("ramo else ", i.id, i.find)
+                    return cls.find(i.find)
 
-    @classmethod
-    def build_dag(cls, list):
-        dag = []
-        # eq
-        for coppia in list[0]:
-            for element in coppia:
-                DAG.build_node(element.strip(), None)
-        for coppia in list[1]:
-            for element in coppia:
-                DAG.build_node(element.strip(), None)
-#            DAG.find_node(hash(coppia[0])).add_enemies(n2)
- #           DAG.find_node(hash(coppia[1])).add_enemies(n1)
+    def is_satisfable(self, diseq):
+        for coppia in diseq:
+            e1 = hash(coppia[0].strip())
+            e2 = hash(coppia[1].strip())
+            if self.find(e1) == self.find(e2):
+                return False
+        return True
