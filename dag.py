@@ -21,26 +21,23 @@ class DAG:
     and the first isn't on the second's enemies list. It also returns if two nodes can be merge or not.
     '''
     def merge(self, n1, n2):
-        if n1.id != n2.id and n1.find != n2.find and n1.id not in n2.enemies:
+        f2 = self.find(n2.id)
+        print("Nuovo merge", n1.id, self.nodes[f2].enemies)
+        if n1.id in self.nodes[f2].enemies:
+            return False
+        if n1.id != n2.id and n1.find != n2.find:
             p1 = n1.ccpar
             p2 = n2.ccpar
-            f1 = self.find(n1.id)
-            f2 = self.find(n2.id)
-            print("n1 = ", f1, self.nodes[f1].ccpar)
-            print("n2 = ", f2, self.nodes[f2].ccpar)
             self.union(n1, n2)
-            f1 = self.find(n1.id)
-            f2 = self.find(n2.id)
-            print("n1 = ", n1.id, f1, self.nodes[f1].ccpar)
-            print("n2 = ", n2.id, n2.find, self.nodes[f2].ccpar)
+            sodisfable = True
             for i in p1:
                 for j in p2:
-                    print(i, j, self.congruent(self.nodes[i], self.nodes[j]))
+                    print(i, self.nodes[j].enemies)
+                    print(sodisfable)
                     if self.find(i) != self.find(j) and self.congruent(self.nodes[i], self.nodes[j]):
-                        self.merge(self.nodes[i], self.nodes[j])
-            return True
-        return False
-
+                        if sodisfable:
+                            sodisfable = self.merge(self.nodes[i], self.nodes[j])
+        return sodisfable
     '''
     this function union two nodes of a dag, it puts the first node's parents in the second node's parent
     and the first node'find attribute in the second node's find attribute
@@ -51,7 +48,10 @@ class DAG:
         self.nodes[id1].find = id2
         for par1 in self.nodes[id1].ccpar:
             self.nodes[id2].add_parent(par1)
-        self.nodes[id2].ccpar = []
+        for ene1 in self.nodes[id1].enemies:
+            self.nodes[id2].add_enemies(ene1)
+        self.nodes[id1].ccpar = []
+        self.nodes[id1].enemies = []
 
     '''
     this function stabilises if two node of a dag are in equivalence relation

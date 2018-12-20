@@ -1,7 +1,7 @@
 import unittest
 
 
-class Test:
+class TestSodisfableProcedure:
 
     def test_union(self):
         print("smettila")

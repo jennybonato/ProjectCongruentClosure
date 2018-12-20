@@ -24,14 +24,15 @@ if __name__ == "__main__":
         print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
               "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,
               "|        enemies = ", d.nodes[i].enemies)
+    print('\n\n\n\n\n')
 
     # merge of all node that are in equivalence relation
-    soddisfable = True
+    sodisfable = True
     for coppiaeq in p.eq:
-        print("Nuova coppia", coppiaeq)
-        if not d.merge(d.nodes[coppiaeq[0]], d.nodes[coppiaeq[1]]):
-            soddisfable = False
-    print("Soddisfacibile = ", soddisfable)
+        print("Coppia ", coppiaeq[0], d.nodes[d.find(coppiaeq[1])].enemies)
+        if sodisfable:
+            sodisfable = d.merge(d.nodes[coppiaeq[0]], d.nodes[coppiaeq[1]])
+    print(sodisfable)
 
     # print results
     print('\n\n\n\n\n')
