@@ -46,12 +46,13 @@ class Parser:
         par = 0
         while i < len(termine):
             if termine[i] == '(':
-                par = 1
-            elif termine[i] == ')' and par == 1:
-                par = 0
+                par = par + 1
+            elif termine[i] == ')' and par > 0:
+                par = par - 1
             elif (termine[i] == ',' and par == 0) or (termine[i] == ')' and par == 0):
-                sons.append(termine[index_son:i])
-                index_son = i + 1
+                if termine[index_son:i] != "":
+                    sons.append(termine[index_son:i].strip())
+                    index_son = i + 1
             i = i + 1
         return sons
 

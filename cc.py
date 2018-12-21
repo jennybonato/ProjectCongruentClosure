@@ -14,7 +14,6 @@ if __name__ == "__main__":
 
     # initialize DAG
     d = DAG()
-
     # parse data and build DAG
     p = Parser(input, d)
     print(p.nodes)
@@ -40,3 +39,6 @@ if __name__ == "__main__":
         print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
               "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,
               "|        enemies = ", d.nodes[i].enemies)
+
+    args = ["f(a)", "g(h(b,c,d))"]
+    print(Parser.find_sons("f(f(a), g(h(b,c,d)))", 1), args)

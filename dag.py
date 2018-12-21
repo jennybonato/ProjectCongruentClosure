@@ -23,13 +23,13 @@ class DAG:
     def merge(self, n1, n2):
         f2 = self.find(n2.id)
         print("Nuovo merge", n1.id, self.nodes[f2].enemies)
+        sodisfable = True
         if n1.id in self.nodes[f2].enemies:
             return False
         if n1.id != n2.id and n1.find != n2.find:
             p1 = n1.ccpar
             p2 = n2.ccpar
             self.union(n1, n2)
-            sodisfable = True
             for i in p1:
                 for j in p2:
                     print(i, self.nodes[j].enemies)
