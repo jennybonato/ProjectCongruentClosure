@@ -1,6 +1,7 @@
 from node import Node
 import re
 
+
 class Parser:
 
     def __init__(self, data, d):
