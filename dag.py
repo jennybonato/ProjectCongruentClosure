@@ -47,7 +47,7 @@ class DAG:
         id1 = self.find(n1.id)
         id2 = self.find(n2.id)
 
-        # select representative of the bigger equivalence class
+        # select representative of the bigger equivalence class, if their equals chooses the second
         for i in self.nodes.keys():
             if self.nodes[i].find == id1:
                 count1 = count1 + 1
@@ -61,13 +61,18 @@ class DAG:
             other = self.nodes[id1]
 
         # union of nodes
-        rappre.find = other.id
+        other.find = rappre.id
         for par1 in other.ccpar:
             rappre.add_parent(par1)
         for ene1 in other.enemies:
             rappre.add_enemies(ene1)
         other.ccpar = []
         other.enemies = []
+
+        # update find field of nodes in "other" equivalence class
+        for i in self.nodes.keys():
+            if i == other:
+                self.nodes[i].find = rappre
 
     '''
     this function stabilises if two node of a dag are in equivalence relation

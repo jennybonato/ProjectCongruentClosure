@@ -1,5 +1,3 @@
-from dag import DAG
-
 
 class Node:
 
