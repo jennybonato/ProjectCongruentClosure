@@ -17,13 +17,14 @@ if __name__ == "__main__":
     # parse data and build DAG
     p = Parser(input, d)
     print(p.nodes)
+    print('\n\n')
 
     # print all node
     for i in d.nodes.keys():
         print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
               "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,
               "|        enemies = ", d.nodes[i].enemies)
-    print('\n\n\n\n\n')
+    print('\n\n')
 
     # merge of all node that are in equivalence relation
     satisfable = True
@@ -33,7 +34,7 @@ if __name__ == "__main__":
     print(satisfable)
 
     # print results
-    print('\n\n\n\n\n')
+    print('\n\n')
     for i in d.nodes.keys():
         print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
               "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,

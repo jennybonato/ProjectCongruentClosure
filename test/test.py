@@ -27,8 +27,8 @@ class TestParser(unittest.TestCase):
 
     def test_findsons(self):
         # test ricostruzione args
-        args = ["f(a)", "g(h(b,c,d))"]
-        self.assertEqual(Parser.find_sons("f(f(a), g(h(b,c,d)))", 1), args)
+        args = ["f(a,b)", "b"]
+        self.assertEqual(Parser.find_sons("f(f(a,b),b)", 1), args)
 
     def test_buildnode(self):
         # test costruzione nodi

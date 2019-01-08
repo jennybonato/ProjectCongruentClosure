@@ -1,7 +1,4 @@
-f(a) = a
-f(a) != b
-a = b
-a = c
-f(f(a)) != f(b)
-f(b) != f(c)
-g(c) = c
+u1 = f1
+u2 = f2
+z = g1
+z != g2

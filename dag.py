@@ -24,8 +24,14 @@ class DAG:
         f1 = self.find(n1.id)
         f2 = self.find(n2.id)
         satisfable = True
-        if n1.id in self.nodes[f2].enemies or n2.id in self.nodes[f1].enemies:
-            return False
+        # check if there aren't enemies in the equivalence class of other node
+        for ene1 in self.nodes[f1].enemies:
+            if ene1 in self.nodes[f2].friends:
+                return False
+        for ene2 in self.nodes[f2].enemies:
+            if ene2 in self.nodes[f1].friends:
+                return False
+
         if n1.id != n2.id and self.find(n1.id) != self.find(n2.id):
             p1 = n1.ccpar
             p2 = n2.ccpar
@@ -62,12 +68,15 @@ class DAG:
 
         # union of nodes
         other.find = rappre.id
-        for par1 in other.ccpar:
-            rappre.add_parent(par1)
-        for ene1 in other.enemies:
-            rappre.add_enemies(ene1)
+        for par in other.ccpar:
+            rappre.add_parent(par)
+        for ene in other.enemies:
+            rappre.add_enemies(ene)
+        for friend in other.friends:
+            rappre.add_friend(friend)
         other.ccpar = []
         other.enemies = []
+        other.friends = []
 
         # update find field of nodes in "other" equivalence class
         for i in self.nodes.keys():
