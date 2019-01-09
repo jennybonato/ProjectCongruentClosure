@@ -10,7 +10,7 @@ def import_data(name_file):
 
 if __name__ == "__main__":
     # import data from file
-    input = import_data("data/input1.txt")
+    input = import_data("data/input2.txt")
 
     # initialize DAG
     d = DAG()

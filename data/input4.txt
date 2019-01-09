@@ -1,0 +1,7 @@
+f(a) = a
+a = b
+a = c
+g(c) = c
+f(a) != b
+f(f(a)) != f(b)
+f(b) != f(c)
