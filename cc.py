@@ -1,5 +1,6 @@
 from parser import Parser
 from dag import DAG
+from wrapper_parser import WrapperParser
 
 
 def import_data(name_file):
@@ -10,10 +11,27 @@ def import_data(name_file):
 
 if __name__ == "__main__":
     # import data from file
-    input = import_data("data/input2.txt")
+    input = import_data("data/input1.txt")
 
     # initialize DAG
-    d = DAG()
+    dag = DAG()
+    w = WrapperParser(input, dag)
+
+    for d in w.dags:
+        for i in d.nodes.keys():
+            print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
+                  "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,
+                  "|        enemies = ", d.nodes[i].enemies)
+        print('\n\n')
+
+    print(w.ccsatisfable(dag))
+    for d in w.dags:
+        for i in d.nodes.keys():
+            print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
+                  "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,
+                  "|        enemies = ", d.nodes[i].enemies)
+        print('\n\n')
+'''
     # parse data and build DAG
     p = Parser(input, d)
     print(p.nodes)
@@ -39,3 +57,4 @@ if __name__ == "__main__":
         print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
               "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,
               "|        enemies = ", d.nodes[i].enemies)
+'''

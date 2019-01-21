@@ -1,11 +1,28 @@
 import re
+from parser import Parser
 
 
 class WrapperParser:
 
     def __init__(self, data, d):
         self.datas = []
-        self.parse_operator(data, None)
+        self.dags = []
+        self.parsers = []
+        self.parse_operator(data)
+
+    def ccsatisfable(self, d):
+        satisfable_all = False
+        for set in self.datas:
+            p = Parser(set, d)
+            satisfable_one = True
+            for coppiaeq in p.eq:
+                if satisfable_one:
+                    satisfable_one = d.merge(d.nodes[coppiaeq[0]], d.nodes[coppiaeq[1]])
+            if satisfable_one:
+                satisfable_all = True
+            self.parsers.append(p)
+            self.dags.append(d)
+        return satisfable_all
 
     def parse_operator(self, data):
         op = None
@@ -19,7 +36,7 @@ class WrapperParser:
                     count += 1
                 if count == 0:
                     j = element.index(i) + 1
-                    op = (re.split("(", element[j:])[0]).strip()
+                    op = (re.split('\(', element[j:])[0]).strip()
                     data_build.append(element[0:j - 1])
                     i = j + len(op) - 1
                     data_build.append(element[i:])

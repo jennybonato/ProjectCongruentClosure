@@ -33,6 +33,12 @@ class Parser:
                 coppia[0] = hash(coppia[0].strip())
                 coppia[1] = hash(coppia[1].strip())
                 self.eq.append(coppia)
+            else:
+                self.add_node(element)
+                self.add_node("tt")
+                coppia[0] = hash(element.strip())
+                coppia[1] = hash("tt")
+                self.eq.append(coppia)
 
     def parse_data(self, data, d, f):
         self.division_eq(data, f)
