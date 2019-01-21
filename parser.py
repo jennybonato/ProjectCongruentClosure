@@ -8,7 +8,7 @@ class Parser:
         self.nodes = {}
         self.diseq = []
         self.eq = []
-        self.parse_data(data, d)
+        self.parse_data(data, d, False)
 
     def add_node(self, termine):
         termine = termine.strip()
@@ -17,7 +17,7 @@ class Parser:
         for i in son:
             self.add_node(i)
 
-    def division_eq(self, data):
+    def division_eq(self, data, f):
         for element in data:
             if "!=" in element:
                 coppia = re.split('!=', element)
@@ -34,8 +34,8 @@ class Parser:
                 coppia[1] = hash(coppia[1].strip())
                 self.eq.append(coppia)
 
-    def parse_data(self, data, d):
-        self.division_eq(data)
+    def parse_data(self, data, d, f):
+        self.division_eq(data, f)
 
         # build all nodes
         for element in self.nodes.keys():
