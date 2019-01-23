@@ -11,11 +11,12 @@ def import_data(name_file):
 
 if __name__ == "__main__":
     # import data from file
-    input = import_data("data/input1.txt")
+    input = import_data("data/input2.txt")
 
     # initialize DAG
     dag = DAG()
     w = WrapperParser(input, dag)
+    print(w.datas)
 
     for d in w.dags:
         for i in d.nodes.keys():
@@ -24,7 +25,7 @@ if __name__ == "__main__":
                   "|        enemies = ", d.nodes[i].enemies)
         print('\n\n')
 
-    print(w.ccsatisfable(dag))
+    print(w.ccsatisfable())
     for d in w.dags:
         for i in d.nodes.keys():
             print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
