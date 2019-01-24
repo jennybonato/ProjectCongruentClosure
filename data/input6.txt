@@ -1,0 +1,6 @@
+a = h(b)
+g(a,a) = g(c,h(d))
+f(a,g(a,a)) = f(h(b), g(c,h(d)))
+b = d
+c = h(b)
+h(b) = h(d)
