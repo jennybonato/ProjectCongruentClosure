@@ -1,5 +1,7 @@
 from parser import Parser
 from dag import DAG
+import time
+import sys
 
 
 def import_data(name_file):
@@ -9,9 +11,13 @@ def import_data(name_file):
 
 
 if __name__ == "__main__":
+    runtime = []
     # import data from file
-    for i in range (1, 14):
-        file = "data/input" + str(i) + ".txt"
+    start = time.clock()
+    if len(sys.argv) < 2:
+        print("Input non valido è necessario inserire un file di input. \n Riprova con \t \"python3 cc.py <file>\"")
+    else:
+        file = "data/" + sys.argv[1]
         input = import_data(file)
         print('\n\n')
         print(file)
@@ -37,10 +43,15 @@ if __name__ == "__main__":
                 satisfable = d.merge(d.nodes[coppiaeq[0]], d.nodes[coppiaeq[1]])
         print(satisfable)
 
-        # print results
-        print('\n\n')
-        for i in d.nodes.keys():
-            print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
-                  "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,
-                  "|        enemies = ", d.nodes[i].enemies)
+        if satisfable:
+            # print results
+            print('\n\n')
+            for i in d.nodes.keys():
+                print("id =", d.nodes[i].id, "|     fn = ", d.nodes[i].fn, "|       find = ", d.find(i),
+                      "|       args = ", d.nodes[i].args, "|       par = ", d.nodes[i].ccpar,
+                      "|        enemies = ", d.nodes[i].enemies)
 
+        end = time.clock()
+        print('\n\n')
+        print("Run in :", end-start)
+        print("-"*180)
