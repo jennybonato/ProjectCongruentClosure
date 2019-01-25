@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.1.3)  25 JAN 2019 11:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.1.3)  25 JAN 2019 16:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -366,23 +366,43 @@ File: babel.def 2018/02/14 3.18 Babel common definitions
 Package: etoolbox 2018/02/11 v2.5e e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count92
 )
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2016/04/27 v1.618033 publication quality tables
+\heavyrulewidth=\dimen104
+\lightrulewidth=\dimen105
+\cmidrulewidth=\dimen106
+\belowrulesep=\dimen107
+\belowbottomsep=\dimen108
+\aboverulesep=\dimen109
+\abovetopsep=\dimen110
+\cmidrulesep=\dimen111
+\cmidrulekern=\dimen112
+\defaultaddspace=\dimen113
+\@cmidla=\count93
+\@cmidlb=\count94
+\@aboverulesep=\dimen114
+\@belowrulesep=\dimen115
+\@thisruleclass=\count95
+\@lastruleclass=\count96
+\@thisrulewidth=\dimen116
+)
 (./Relazione.aux)
 \openout1 = `Relazione.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
-LaTeX Font Info:    ... okay on input line 6.
-LaTeX Info: Redefining \it@ocap on input line 6.
-LaTeX Info: Redefining \it@ccap on input line 6.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Info: Redefining \it@ocap on input line 7.
+LaTeX Info: Redefining \it@ccap on input line 7.
 
 
 File italian.ldf warning: 
@@ -390,46 +410,53 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting 
-italian.ldf    on input line 6.
+italian.ldf    on input line 7.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7--11
+Underfull \hbox (badness 10000) in paragraph at lines 8--12
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 26.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 28.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 26.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 28.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \hbox (badness 3646) in paragraph at lines 43--44
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 50.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 50.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 50.
+
+Underfull \hbox (badness 3646) in paragraph at lines 100--101
 []\OT1/cmr/m/n/12 Daniel Kroe-ning, Ofer Stri-ch-man. \OT1/cmr/m/it/12 De-ci-si
 on Pro-ce-du-res. An
  []
 
-[3] (./Relazione.aux) ) 
+[4] [5] (./Relazione.aux) ) 
 Here is how much of TeX's memory you used:
- 1422 strings out of 492982
- 16170 string characters out of 6134897
- 90994 words of memory out of 5000000
- 5029 multiletter control sequences out of 15000+600000
- 5923 words of font info for 22 fonts, out of 8000000 for 9000
+ 1505 strings out of 492982
+ 17221 string characters out of 6134897
+ 89994 words of memory out of 5000000
+ 5102 multiletter control sequences out of 15000+600000
+ 8362 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 23i,4n,23p,1436b,177s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Relazione.pdf (3 pages, 72966 bytes).
+ 23i,7n,23p,1436b,219s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Relazione.pdf (5 pages, 85239 bytes).
 PDF statistics:
- 38 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 44 PDF objects out of 1000 (max. 8388607)
+ 30 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

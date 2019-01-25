@@ -1,6 +1,7 @@
 \documentclass[a4paper, 11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
+\usepackage{booktabs}
 %\usepackage{fullpage}
 
 \begin{document}
@@ -13,7 +14,8 @@ Algoritmo di Chiusura di Congruenza \hfill Data: 09/01/2019 \\
 L'obbiettivo di questo progetto è realizzare un implementazione dell'Algoritmo di Chiusura di Congruenza per la logica del I Ordine libera dai quantificatori. Tale algoritmo utilizza un grafo diretto aciclico opportunamente costruito in cui ogni nodo è un simbolo di costante oppure un simbolo di funzione e ogni arco rappresenta la relazione di essere argomento del nodo padre. Ogni nodo è unico, pertanto è possibile che ci siano diversi padri per uno stesso nodo.
 
 Per utilizzare il seguente programma è sufficiente editare un file di testo e posizionarlo nella cartella \verb|data|. 
-Tale file può avere diverse forme: per ogni riga una uguaglianza o disuguaglianza di simboli di funzione o di costante, per ogni riga un simbolo di funzione o di costante per ogni riga senza predicato d'uguaglianza oppure è anche possibile creare un file di input che sia una combinazione delle due possibilità. È possibile inserire predicati liberi ma, dal momento che non vengono interpretati, vengono considerati esattamente come funzioni. Per eseguire il programma è necessario eseguire il seguente comando:
+Il file deve avere per ogni riga un'uguaglianza o disuguaglianza di simboli di funzioni  oppure di costanti, è possibile introdurre predicati diversi dall'uguaglianza, in tal caso vengono considerati come funzioni.
+Per eseguire il programma è necessario eseguire il seguente comando:
 \begin{verbatim}
 python3 cc.py <file_input>
 \end{verbatim} 
@@ -32,9 +34,64 @@ Lo sviluppo del programma ha prodotto i seguenti file:
 \section*{Scelte implementative e Euristiche significative}
 Una delle scelte implementative più sfruttate è quella di utilizzare come id di ogni nodo l'hash del termine che rappresentano. Per esempio il nodo che rappresenta il termine \verb|f(a)| avrà l'id \verb|hash("f(a)")|. L'utilità di questa scelta è dovuta al fatto che la struttura del nodo non tiene traccia del termine che identifica ma mantiene le liste di argomenti e l'identificatore del simbolo di funzione o di costante. Utilizzando gli hash è possibile, durante l'esecuzione, calcolare direttamente l'id del nodo che vogliamo raggiungere. Questa scelta si combina con quella di utilizzare un dizionario per memorizzare i nodi: calcolando l'hash direttamente è possibile accedere al nodo semplicemente con \verb|nodes[id]|, questo permette di lasciare la ricerca e l'estrazione del nodo all'implementazione di python dei dizionari.
 
+Un ulteriore scelta implementativa è stata quella di utilizzare le liste \verb|enemies|, \verb|friends|. Entrambe le liste vengono utilizzate per decidere se fare il merge di due nodi, in particolare la lista \verb|enemies| mantiene per ogni classe di equivalenza l'elenco dei nodi con cui non può essere unita mentre la lista \verb|friends| dualmente memorizza per ogni classe di equivalenza la lista di nodi che ne fanno parte. Questa scelta ci permette di ridurre la complessità dell'algoritmo perché posso dichiarare l'insoddisfacibilità dell'insieme appena è necessario fare il merge di due nodi in relazione di disuguaglianza ovvero nella lista \verb|enemies|. Inoltre è molto importante notare che per permettere il merge di due nodi \verb|n1|, \verb|n2| è necessario che ogni nodo nella lista \verb|enemies| di \verb|n1| non sia nella lista \verb|friends| di \verb|n2|, se non avessimo la lista \verb|friends| avremmo bisogno di visitare tutto il grafo alla ricerca dei nodi nella stessa classe di equivalenza.
+
+Abbiamo visto l'utilità di queste liste ma è importante notare che sono anche semplici da mantenere, a occuparsene è la funzione \verb|union|. In questa funzione sono presenti altre scelte implementative che utilizzano proprietà di queste liste. In primo luogo la \verb|union| sceglie quale dei due nodi diventerà il rappresentante della nuova classe di equivalenza in base alla grandezza della lista \verb|friends| più grande. L'idea è che se scelgo il nodo che ha la classe di equivalenza più grande arriverò prima ad un ipotetico fallimento. In seguito all'effettiva unione dei nodi la funzione si occupa di rendere consistente le liste mettendo tutti gli elementi nel rappresentante della classe e togliendole dal nodo che è stato aggiunto. Un'ulteriore semplificazione sulla funzione \verb|union| è quella relativa all'aggiornamento del campo \verb|find|: l'identificazione del nodo identificatore viene svolta da una catena di chiamate della funzione \verb|find|, per ridurre questa catena la funzione \verb|union| si occupa di cambiare il campo \verb|find| non soltanto del nodo che diventa parte della classe di equivalenza ma anche di tutti quelli che facevano parte della sua lista \verb|friends| ovvero tutti quelli che erano nella sua classe di equivalenza.
+
 \section*{Complessità}
 
 \section*{Test effettuati}
+In un primo momento per testare il programma sono stati scritti dei test utilizzando la classe \verb|unittest| di python.
+
+Successivamente è stato possibile testarne il funzionamento utilizzando la bibliografia di questa relazione. Gli input che sono stati passati al programma per testarli si trovano nella cartella \verb|data|, riportiamo nella tabella~\ref{tab:tempi} i tempi di esecuzione con i rispettivi input. La tabella~\ref{tab:tempi_rapporto} mette in relazione il rapporto tra numero di disequazioni e di equazioni con la soddisfacibilità degli input. 
+
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\toprule
+Input & Tempo di Esecuzione(s) \\
+\midrule
+input1.txt  & 0.001880 \\
+input2.txt  & 0.001500 \\
+input3.txt  & 0.001568 \\
+input4.txt  & 0.001877 \\
+input5.txt  & 0.001470 \\
+input6.txt  & 0.002199 \\
+input7.txt  & 0.001830 \\
+input8.txt  & 0.002017 \\
+input9.txt  & 0.002057 \\
+input10.txt  & 0.001931 \\
+input11.txt  & 0.002159 \\
+input12.txt  & 0.002045 \\
+input13.txt  & 0.001882 \\
+input14.txt  & 0.001752 \\
+\bottomrule
+\end{tabular}
+\caption{Tabella dei tempi di esecuzione}
+\label{tab:tempi}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{lll}
+\toprule
+diseq./eq. & Soddisfacibile & Insoddisfacibile \\
+\midrule
+0/2 & 0.001470 & - \\
+0/3 & 0.001830 & - \\
+0/5 & 0.002045 & - \\
+0/6 & 0.002199, 0.001931 & - \\
+0/7 & 0.002159 & - \\
+1/1 & - & 0.001880 \\
+1/2 & 0.001500, 0.002017 & 0.002057 \\
+1/3 & 0.001882 & 0.001752 \\
+2/3 & - & 0.001568 \\
+3/4 & - & 0.001877 \\
+\bottomrule
+\end{tabular}
+\caption{Tabella dei tempi di esecuzione}
+\label{tab:tempi_rapporto}
+\end{table}
 
 \section*{Possibili Estensioni}
 

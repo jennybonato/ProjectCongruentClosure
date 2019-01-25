@@ -48,18 +48,11 @@ class DAG:
     and the first node'find attribute in the second node's find attribute
     '''
     def union(self, n1, n2):
-        count1 = 0
-        count2 = 0
         id1 = self.find(n1.id)
         id2 = self.find(n2.id)
 
         # select representative of the bigger equivalence class, if their equals chooses the second
-        for i in self.nodes.keys():
-            if self.nodes[i].find == id1:
-                count1 = count1 + 1
-            if self.nodes[i].find == id2:
-                count2 = count2 + 1
-        if count1 > count2:
+        if len(self.nodes[id1].friends) > len(self.nodes[id2].friends):
             rappre = self.nodes[id1]
             other = self.nodes[id2]
         else:
