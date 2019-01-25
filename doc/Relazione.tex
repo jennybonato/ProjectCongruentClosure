@@ -30,7 +30,7 @@ Lo sviluppo del programma ha prodotto i seguenti file:
 \end{itemize}
 
 \section*{Scelte implementative e Euristiche significative}
-Una delle scelte implementative più sfruttate è quella di utilizzare come id di ogni nodo l'hash del termine che rappresentano. Per esempio il nodo che rappresenta il termine \verb|f(a)| avrà l'id \verb|hash("f(a)")|. Questa scelta è molto utile perché nel nodo non viene memorizzato il termine che identifica come stringa ma sottoforma di liste di argomenti e di identificatore della funzione, utilizzando gli hash è possibile, durante l'esecuzione, .
+Una delle scelte implementative più sfruttate è quella di utilizzare come id di ogni nodo l'hash del termine che rappresentano. Per esempio il nodo che rappresenta il termine \verb|f(a)| avrà l'id \verb|hash("f(a)")|. L'utilità di questa scelta è dovuta al fatto che la struttura del nodo non tiene traccia del termine che identifica ma mantiene le liste di argomenti e l'identificatore del simbolo di funzione o di costante. Utilizzando gli hash è possibile, durante l'esecuzione, calcolare direttamente l'id del nodo che vogliamo raggiungere. Questa scelta si combina con quella di utilizzare un dizionario per memorizzare i nodi: calcolando l'hash direttamente è possibile accedere al nodo semplicemente con \verb|nodes[id]|, questo permette di lasciare la ricerca e l'estrazione del nodo all'implementazione di python dei dizionari.
 
 \section*{Complessità}
 

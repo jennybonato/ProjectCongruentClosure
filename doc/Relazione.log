@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.1.3)  25 JAN 2019 10:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.1.3)  25 JAN 2019 11:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -413,20 +413,20 @@ on Pro-ce-du-res. An
 
 [3] (./Relazione.aux) ) 
 Here is how much of TeX's memory you used:
- 1421 strings out of 492982
- 16162 string characters out of 6134897
- 89994 words of memory out of 5000000
- 5028 multiletter control sequences out of 15000+600000
+ 1422 strings out of 492982
+ 16170 string characters out of 6134897
+ 90994 words of memory out of 5000000
+ 5029 multiletter control sequences out of 15000+600000
  5923 words of font info for 22 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 23i,4n,23p,1436b,213s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 23i,4n,23p,1436b,177s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Relazione.pdf (3 pages, 71537 bytes).
+Output written on Relazione.pdf (3 pages, 72966 bytes).
 PDF statistics:
  38 PDF objects out of 1000 (max. 8388607)
  26 compressed objects within 1 object stream
