@@ -1,6 +1,7 @@
 \documentclass[a4paper, 11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
+%\usepackage{fullpage}
 
 \begin{document}
 \noindent
@@ -9,32 +10,36 @@
 Algoritmo di Chiusura di Congruenza \hfill Data: 09/01/2019 \\
 
 \section*{Introduzione al problema e utilizzo del programma}
-L'obbiettivo di questo progetto era realizzare un implementazione dell'Algoritmo di Chiusura di Congruenza per la logica del I Ordine libera dai quantificatori. Tale algoritmo utilizza un grafo diretto aciclico opportunamente costruito in cui ogni nodo è un simbolo di costante oppure un simbolo di funzione e ogni arco rappresenta la relazione di essere argomento del nodo padre. Ogni nodo è unico pertanto è possibile che ci siano diversi padri per uno stesso nodo.
+L'obbiettivo di questo progetto è realizzare un implementazione dell'Algoritmo di Chiusura di Congruenza per la logica del I Ordine libera dai quantificatori. Tale algoritmo utilizza un grafo diretto aciclico opportunamente costruito in cui ogni nodo è un simbolo di costante oppure un simbolo di funzione e ogni arco rappresenta la relazione di essere argomento del nodo padre. Ogni nodo è unico, pertanto è possibile che ci siano diversi padri per uno stesso nodo.
+
+Per utilizzare il seguente programma è sufficiente editare un file di testo e posizionarlo nella cartella \verb|data|. 
+Tale file può avere diverse forme: per ogni riga una uguaglianza o disuguaglianza di simboli di funzione o di costante, per ogni riga un simbolo di funzione o di costante per ogni riga senza predicato d'uguaglianza oppure è anche possibile creare un file di input che sia una combinazione delle due possibilità. È possibile inserire predicati liberi ma, dal momento che non vengono interpretati, vengono considerati esattamente come funzioni. Per eseguire il programma è necessario eseguire il seguente comando:
+\begin{verbatim}
+python3 cc.py <file_input>
+\end{verbatim} 
 
 \section*{Struttura del Progetto}
 Il progetto è stato implementato in \verb|python3| ed è strutturato nelle seguenti cartelle: la cartella \verb|doc| in cui è presente tutta la documentazione riguardo il progetto, la cartella \verb|data| in cui sono presenti i file di input del programma, la cartella \verb|test| in cui sono presenti i file di test e la cartella principale in cui si trovano tutti i file che compongono il programma.
 
 Lo sviluppo del programma ha prodotto i seguenti file:
 \begin{itemize}
-\item \verb|cc.py| : in questo file troviamo il \verb|main| del programma. Il programma elabora il file di input e lo passa al \verb|Parser| che costruisce il grafo. Successivamente si occupa di stampare a video il grafo di partenza, fa il \verb|merge| dei nodi che sono in relazione di uguaglianza e ritornarne l'output ovvero se l'insieme è soddisfacibile allora stampa l'albero risultante altrimenti dichiara l'insoddisfacibilità.
-\item \verb|dag.py| : in questo file possiamo trovare la definizione della classe \verb|DAG|. La classe ha come attributo un dizionario in cui vengono mantenuti i nodi, le chiavi del dizionario sono rappresentate dall'hash del nodo che rappresentano. Per esempio, se nel dag è presente il nodo \verb|f(a)| la chiave che lo rappresenta nel dizionario è esattamente \verb|hash("f(a)")|, questa scelta implementativa verrà meglio spiegata nella prossima sezione. I metodi di tale classe sono quelli dell'algoritmo cc visti a lezione, sono \verb|merge|, \verb|union|, \verb|congruent|, \verb|find|. Tutti questi metodi svolgono operazioni sui nodi del dizionario. 
+\item \verb|cc.py| : in questo file troviamo il \verb|main| del programma. Il programma elabora il file di input e lo passa al \verb|Parser| che costruisce il grafo. Successivamente si occupa di stampare a video il grafo di partenza, fare il \verb|merge| dei nodi che sono in relazione di uguaglianza e ritornarne l'output ovvero se l'insieme è soddisfacibile allora stampa l'albero risultante altrimenti dichiara l'insoddisfacibilità.
+\item \verb|dag.py| : in questo file possiamo trovare la definizione della classe \verb|DAG|. La classe ha come attributo un dizionario in cui vengono memorizzati i nodi, le chiavi del dizionario sono rappresentate dall'hash del nodo che rappresentano. Per esempio, se nel dag è presente il nodo \verb|f(a)| la chiave che lo rappresenta nel dizionario è esattamente \verb|hash("f(a)")|, questa scelta implementativa verrà meglio spiegata nella prossima sezione. I metodi di tale classe sono quelli dell'algoritmo cc visti a lezione, sono \verb|merge|, \verb|union|, \verb|congruent|, \verb|find|. Tutti questi metodi svolgono operazioni sui nodi del dizionario. 
 \item \verb|node.py| : in questo file possiamo trovare la definizione della classe \verb|Node|. Ogni nodo ha come attributi: \verb|id| rappresentato dall'hash del termine che identificano, \verb|fn| il simbolo di funzione o di costante che implementano, \verb|find| l'id del rappresentante della classe di equivalenza cui appartiene, \verb|ccpar| la lista degli id dei suoi genitori, \verb|args| la lista degli id dei suoi argomenti, \verb|enemies| ovvero la lista degli id dei nodi con cui non può finire nella stessa classe di equivalenza, \verb|friends| questo attributo viene mantenuto nel nodo rappresentante della classe di equivalenza e rappresenta tutti i nodi nella stessa classe.
 \item \verb|parser.py| : in questo file possiamo trovare la definizione della classe \verb|Parser|. Tale classe ha come attributi il dizionario \verb|nodes|, le cui chiavi sono gli hash dei nodi che ha già costruito e i cui valori sono le stringhe di cui la chiave è hash. Inoltre sono attributi della classe due liste \verb|eq|, \verb|diseq| in cui vengono memorizzate le coppie di id che sono in relazione di uguaglianza o disuguaglianza. Il Costruttore della classe istanzia gli attributi e chiama la funzione \verb|parse_data| e gli passa la lista in input, tale funzione si occupa in primo luogo di chiamare la funzione \verb|division_eq| che divide la lista in input nelle liste di equazioni e disequazioni, nel fare quest'operazione popola il dizionario con tutti i termini coinvolti. In secondo luogo si occupa di chiamare la funzione \verb|build_node| su ogni termine del dizionario \verb|nodes|, tale funzione si occupa di creare il nodo del termine e ricorsivamente anche i nodi dei possibili argomenti del termine. L'identificazione degli argomenti è permessa grazie ad una funzione ausiliaria \verb|find_sons| che elabora il termine alla ricerca dei suoi argomenti e ritorna la lista di tali argomenti. In fine la funzione \verb|parse_data| si occupa di aggiungere i nemici dei nodi popolando le rispettive liste \verb|enemies| di ogni nodo utilizzando le coppie nella lista \verb|diseq|.
-
 \end{itemize}
-\section*{Scelte implementative significative}
 
-\section*{Euristiche utilizzate}
+\section*{Scelte implementative e Euristiche significative}
+Una delle scelte implementative più sfruttate è quella di utilizzare come id di ogni nodo l'hash del termine che rappresentano. Per esempio il nodo che rappresenta il termine \verb|f(a)| avrà l'id \verb|hash("f(a)")|. Questa scelta è molto utile perché nel nodo non viene memorizzato il termine che identifica come stringa ma sottoforma di liste di argomenti e di identificatore della funzione, utilizzando gli hash è possibile, durante l'esecuzione, .
 
 \section*{Complessità}
 
 \section*{Test effettuati}
 
-\section*{Valutazioni Finali}
+\section*{Possibili Estensioni}
 
 \begin{thebibliography}{2}
 \bibitem{Calculus} Aaron R. Bradley, Zohar Manna. \emph{The Calculus of Computation. Decision Procedures with Applications to Verification.}.
 \bibitem{Decision}  Daniel Kroening, Ofer Strichman. \emph{Decision Procedures. An Algorithmic Point of View}.
 \end{thebibliography}
-
 \end{document}

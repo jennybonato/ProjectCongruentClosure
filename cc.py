@@ -19,15 +19,9 @@ if __name__ == "__main__":
     else:
         file = "data/" + sys.argv[1]
         input = import_data(file)
-        print('\n\n')
-        print(file)
-        print(input)
-        print('\n\n')
         # initialize DAG
         d = DAG()
         p = Parser(input, d)
-        print(p.nodes)
-        print('\n\n')
 
         # print all node
         for i in d.nodes.keys():
