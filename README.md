@@ -6,7 +6,6 @@ The goal of this project is to implement the congruence closure algorithm of fir
 To use this program is required to edit a file in put it in the `data` folder. The file have to contain a raw for every equivalence or disequivalence of function symbols or constants. It is possible to introduce predicates different than equality but they will be interpreted as symbol function.
 
 To exec the program run: `python3 cc.py <input_file>`
-prova di commit
 
 ### Project structure
 The project was implemented in python3 and it contains the `data` folder for inputs, the `doc` folder for the documentation that is in `LaTeX`, the `test` folder for the unit test and the `main` folder with the program.
